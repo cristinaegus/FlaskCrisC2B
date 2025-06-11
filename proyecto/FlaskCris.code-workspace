@@ -1,0 +1,26 @@
+{
+	"folders": [
+		{
+			"path": "../../../FlaskCris"
+		},
+		{
+			"path": "../formularios"
+		},
+		{
+			"path": "../instance"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../proyecto2"
+		},
+		{
+			"path": "../sesiones_cookies"
+		},
+		{
+			"path": "../con_estilo"
+		}
+	],
+	"settings": {}
+}

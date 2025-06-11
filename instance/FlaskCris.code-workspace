@@ -1,0 +1,38 @@
+{
+	"folders": [
+		{
+			"path": "../../../FlaskCris"
+		},
+		{
+			"path": "../.venv"
+		},
+		{
+			"path": "../.venv/Include"
+		},
+		{
+			"path": "../.venv/Lib"
+		},
+		{
+			"path": "../.venv/Scripts"
+		},
+		{
+			"path": "../bbdd"
+		},
+		{
+			"path": "../formularios"
+		},
+		{
+			"path": "."
+		},
+		{
+			"path": "../proyecto"
+		},
+		{
+			"path": "../proyecto2"
+		},
+		{
+			"path": "../sesiones_cookies"
+		}
+	],
+	"settings": {}
+}
