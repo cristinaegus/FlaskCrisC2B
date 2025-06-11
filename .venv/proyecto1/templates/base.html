@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mi Sitio Web</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/estilos.css') }}"
+    />
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/about">Acerca de</a></li>
+          <li><a href="/contact">Contacto</a></li>
+          <li><a href="/contact_enviado">Datos</a></li>
+        </ul>
+      </nav>
+    </header>
+    <div class="container">
+      <h1>Bienvenido a Mi Sitio Web</h1>
+      <p>Este es un ejemplo de párrafo en la plantilla base de proyecto1.</p>
+      {% block content %}
+      <!-- Contenido específico de cada página se insertará aquí -->
+      {% endblock %}
+    </div>
+    <footer>
+      <p>&copy; 2025 Mi Sitio Web</p>
+    </footer>
+  </body>
+</html>
