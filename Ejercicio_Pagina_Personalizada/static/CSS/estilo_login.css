@@ -69,9 +69,7 @@ a {
   margin-top: 2rem;
 }
 
-.configurar-body {
-  /* El color de fondo se sobrescribe dinámicamente con el atributo style desde Jinja/JS */
-}
+/* El color de fondo de .configurar-body se sobrescribe dinámicamente con el atributo style desde Jinja/JS */
 
 @media (max-width: 600px) {
   form {
