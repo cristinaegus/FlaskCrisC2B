@@ -1,5 +1,3 @@
-<!-- Ejercicio_Pagina_Personalizada/templates/base.html -->
-
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -34,13 +32,22 @@
         background: #00bcd4;
         color: #2d3e50;
       }
+      body[data-bgcolor] {
+        background-color: var(--bgcolor, #ffffff);
+      }
     </style>
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var body = document.body;
+        var color = body.getAttribute('data-bgcolor');
+        if (color) {
+          body.style.setProperty('--bgcolor', color);
+        }
+      });
+    </script>
     {% block extra_head %}{% endblock %}
   </head>
-  <body
-    class="{{ body_class|default('') }}"
-    style="background-color: {{ color|default('#ffffff') }};"
-  >
+  <body class="{{ body_class|default('') }}" data-bgcolor="{{ color|default('#ffffff') }}">
     <nav class="navbar">
       <a href="{{ url_for('bienvenida') }}">Inicio</a>
       <a href="{{ url_for('configurar') }}">Configurar</a>
