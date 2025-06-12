@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}Bienvenida{% endblock %}</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='CSS/estilo_login.css') }}"
+    />
+    <style>
+      .navbar {
+        width: 100%;
+        background: #2d3e50;
+        padding: 1rem 0;
+        display: flex;
+        justify-content: center;
+        gap: 2rem;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        margin-bottom: 2rem;
+      }
+      .navbar a {
+        color: #fff;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 1.1rem;
+        transition: color 0.2s;
+        padding: 0.3rem 1rem;
+        border-radius: 4px;
+      }
+      .navbar a:hover {
+        background: #00bcd4;
+        color: #2d3e50;
+      }
+    </style>
+  </head>
+  <body style="background-color: {{ color|default('#ffffff') }};">
+    <nav class="navbar">
+      <a href="{{ url_for('bienvenida') }}">Inicio</a>
+      <a href="{{ url_for('configurar') }}">Configurar</a>
+    </nav>
+    {% block content %}
+    <h2>Bienvenido a mi página web</h2>
+    <p>Esta es la sección principal de la web.</p>
+    {% endblock %}
+  </body>
+</html>
