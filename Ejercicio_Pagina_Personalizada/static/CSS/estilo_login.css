@@ -174,6 +174,65 @@ footer {
   margin-bottom: 1rem;
   font-weight: 600;
 }
+.btn-inicio {
+  display: inline-block;
+  background: #5e68c4;
+  color: #fff;
+  padding: 0.8rem 2rem;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin: 2rem auto 0 auto;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+.btn-inicio:hover {
+  background: #00bcd4;
+  color: #2d3e50;
+}
+.btn-borrar-tarea {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.4rem 0;
+  background: #e53935;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin: 0;
+  display: block;
+}
+.btn-borrar-tarea:hover {
+  background: #b71c1c;
+  color: #fff;
+}
+.salir-derecha {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1rem;
+}
+.btn-salir {
+  display: inline-block;
+  background: #e53935;
+  color: #fff;
+  padding: 0.6rem 1.5rem;
+  border-radius: 6px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  text-decoration: none;
+  margin: 0 0 1.5rem 0;
+  transition: background 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+  border: none;
+}
+.btn-salir:hover {
+  background: #b71c1c;
+  color: #fff;
+}
 @media (max-width: 600px) {
   form {
     padding: 1rem;

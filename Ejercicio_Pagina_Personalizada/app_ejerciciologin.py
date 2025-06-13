@@ -32,12 +32,21 @@ class Tarea:
         self.estado = estado
 
 def get_tareas_usuario():
-    return session.get('tareas', [])
+    email = session.get('email')
+    if not email:
+        return []
+    tareas_por_usuario = session.get('tareas_por_usuario', {})
+    return tareas_por_usuario.get(email, [])
 
 def add_tarea_usuario(descripcion, estado):
-    tareas = session.get('tareas', [])
+    email = session.get('email')
+    if not email:
+        return
+    tareas_por_usuario = session.get('tareas_por_usuario', {})
+    tareas = tareas_por_usuario.get(email, [])
     tareas.append({'descripcion': descripcion, 'estado': estado})
-    session['tareas'] = tareas
+    tareas_por_usuario[email] = tareas
+    session['tareas_por_usuario'] = tareas_por_usuario
 
 @app.route('/favicon.ico')
 def favicon():
@@ -46,7 +55,19 @@ def favicon():
         'favicon.ico',
         mimetype='image/vnd.microsoft.icon'
     )
-@app.route('/', methods=['GET', 'POST'])
+@app.route('/')
+def root():
+    # Si ya está registrado, ir directo a mi_web
+    if session.get('nombre'):
+        return redirect(url_for('bienvenida'))
+    return render_template('home.html')
+
+@app.route('/home')
+def home():
+    # Redirigir a la raíz para mantener un solo punto de entrada
+    return redirect(url_for('root'))
+
+@app.route('/configurar', methods=['GET', 'POST'])
 def configurar():
     color = request.cookies.get('color')
     mensaje = None
@@ -71,20 +92,25 @@ def configurar():
         resp = make_response(redirect(url_for('bienvenida')))
         resp.set_cookie('color', color)
         session['nombre'] = nombre
+        session['email'] = email
         session['mensaje'] = mensaje
+        # Inicializar tareas para el nuevo usuario si no existen
+        tareas_por_usuario = session.get('tareas_por_usuario', {})
+        if email not in tareas_por_usuario:
+            tareas_por_usuario[email] = []
+            session['tareas_por_usuario'] = tareas_por_usuario
         return resp
-    # Si no hay color en la cookie, usar blanco por defecto
     if not color:
         color = '#ffffff'
     mensaje = session.pop('mensaje', None)
-    # No rellenar los campos con datos de sesión, siempre vacíos
     return render_template('configurar.html', nombre='', apellido='', email='', color=color, mensaje=mensaje)
 
 @app.route('/bienvenida', methods=['GET', 'POST'])
 def bienvenida():
     nombre = session.get('nombre')
+    email = session.get('email')
     color = request.cookies.get('color')
-    if not nombre:
+    if not nombre or not email:
         resp = make_response(redirect(url_for('configurar')))
         resp.set_cookie('color', '', expires=0)
         return resp
@@ -100,12 +126,33 @@ def bienvenida():
         add_tarea_usuario(descripcion, estado)
         return redirect(url_for('bienvenida'))
     tareas = [Tarea(t['descripcion'], t['estado']) for t in get_tareas_usuario()]
-    return render_template('inicio.html', nombre=nombre, color=color, tareas=tareas)
+    return render_template('mi_web.html', nombre=nombre, color=color, tareas=tareas)
+
+@app.route('/borrar_tarea/<int:idx>', methods=['POST'])
+def borrar_tarea(idx):
+    email = session.get('email')
+    if not email:
+        return redirect(url_for('bienvenida'))
+    tareas_por_usuario = session.get('tareas_por_usuario', {})
+    tareas = tareas_por_usuario.get(email, [])
+    if 0 <= idx < len(tareas):
+        tareas.pop(idx)
+        tareas_por_usuario[email] = tareas
+        session['tareas_por_usuario'] = tareas_por_usuario
+    return redirect(url_for('bienvenida'))
 
 @app.route('/olvidar')
 def olvidar():
     session.pop('nombre', None)
+    session.pop('email', None)
     resp = make_response(redirect(url_for('configurar')))
+    resp.set_cookie('color', '', expires=0)
+    return resp
+
+@app.route('/salir')
+def salir():
+    session.clear()
+    resp = make_response(redirect(url_for('root')))
     resp.set_cookie('color', '', expires=0)
     return resp
 
