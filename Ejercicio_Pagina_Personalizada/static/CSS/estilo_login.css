@@ -12,6 +12,11 @@ h2 {
   margin-top: 2rem;
   text-align: center;
 }
+h3 {
+  color: #144172;
+  margin-top: 1.5rem;
+  text-align: center;
+}
 
 form {
   max-width: 400px;
@@ -214,12 +219,13 @@ footer {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 1rem;
+  padding-right: 1rem;
 }
 .btn-salir {
   display: inline-block;
   background: #e53935;
   color: #fff;
-  padding: 0.6rem 1.5rem;
+  padding: 0.3rem 1.5rem;
   border-radius: 6px;
   font-size: 1.05rem;
   font-weight: 600;

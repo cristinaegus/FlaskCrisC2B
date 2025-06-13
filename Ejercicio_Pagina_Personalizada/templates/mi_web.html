@@ -4,7 +4,7 @@ content %}
 <div class="salir-derecha">
   <a href="{{ url_for('salir') }}" class="btn-salir">Salir</a>
 </div>
-<p>Esta es la sección principal de la web.</p>
+
 <h3>Agregar nueva tarea</h3>
 {% if mensaje_tarea %}
 <div class="mensaje">{{ mensaje_tarea }}</div>
@@ -19,6 +19,7 @@ content %}
     <option value="En progreso">En progreso</option>
     <option value="Hecho">Hecho</option>
   </select>
+
   <button type="submit">Agregar tarea</button>
 </form>
 {% if tareas and tareas|length > 0 %}
